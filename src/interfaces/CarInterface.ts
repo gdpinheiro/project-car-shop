@@ -1,12 +1,27 @@
+import { model, Schema } from 'mongoose';
 import { z } from 'zod';
-import { Vehicle } from './VehicleInterface';
+import { Vehicle, VehicleSchema } from './VehicleInterface';
 
-const CarSchema = z.object({
+const CarSchema = VehicleSchema.extend({
   doorsQty: z.number().min(2).max(4),
   seatsQty: z.number().min(2).max(7),
 });
 
-type Car = Vehicle & z.infer<typeof CarSchema>;
+interface Car extends z.infer<typeof CarSchema>, Vehicle {}
 
-export default CarSchema;
-export { Car };
+const carMongooseSchema = new Schema<Car>(
+  {
+    model: String,
+    year: Number,
+    color: String,
+    status: Boolean,
+    buyValue: Number,
+    doorsQty: Number,
+    seatsQty: Number,
+  },
+  { versionKey: false },
+);
+
+const carMongooseModel = model('Cars', carMongooseSchema);
+
+export { Car, carMongooseSchema, carMongooseModel, CarSchema };

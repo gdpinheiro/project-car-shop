@@ -1,3 +1,4 @@
+import { Schema } from 'mongoose';
 import { z } from 'zod';
 
 const VehicleSchema = z.object({
@@ -10,5 +11,12 @@ const VehicleSchema = z.object({
 
 type Vehicle = z.infer<typeof VehicleSchema>;
 
-export { Vehicle };
-export default VehicleSchema;
+const vehicleMongooseSchema = new Schema<Vehicle>({
+  model: String,
+  year: Number,
+  color: String,
+  status: Boolean,
+  buyValue: Number,
+});
+
+export { Vehicle, vehicleMongooseSchema, VehicleSchema };
