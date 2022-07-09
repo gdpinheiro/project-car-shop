@@ -1,5 +1,4 @@
 import { Car, CarSchema } from '../interfaces/CarInterface';
-// import VehicleSchema from '../interfaces/VehicleInterface';
 import Service, { ServiceError } from '.';
 import CarModel from '../models/CarModel';
 
