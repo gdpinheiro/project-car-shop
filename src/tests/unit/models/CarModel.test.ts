@@ -10,7 +10,7 @@ import {
 } from '../../mock/CarMock';
 
 describe('Camada Model Car', () => {
-  describe('create rota "/cars"', () => {
+  describe('Verifies the POST/cars route', () => {
     before(() => {
       sinon.stub(Model, 'create').resolves(postCarsResponse);
     });
@@ -19,7 +19,7 @@ describe('Camada Model Car', () => {
       (Model.create as SinonStub).restore();
     });
 
-    it('create new car', async () => {
+    it('Should create an car when given the correct data', async () => {
       const car = new CarModel();
 
       const result = await car.create(postCars);
@@ -28,7 +28,7 @@ describe('Camada Model Car', () => {
     });
   });
 
-  describe('find all rota "/cars"', () => {
+  describe('Verifies the GET/cars route', () => {
     before(() => {
       sinon.stub(Model, 'find').resolves(getCarsResponse);
     });
@@ -37,7 +37,7 @@ describe('Camada Model Car', () => {
       (Model.find as SinonStub).restore();
     });
 
-    it('find all cars', async () => {
+    it('Should return all the cars', async () => {
       const car = new CarModel();
 
       const result = await car.read();
@@ -46,7 +46,7 @@ describe('Camada Model Car', () => {
     });
   });
 
-  describe('find by id rota "/cars/:id"', () => {
+  describe('Verifies the GET/cars/:id route', () => {
     before(() => {
       sinon.stub(Model, 'findOne').resolves(getCarsIdResponse);
     });
@@ -55,7 +55,7 @@ describe('Camada Model Car', () => {
       (Model.findOne as SinonStub).restore();
     });
 
-    it('find by id a car', async () => {
+    it('Should return the correct car', async () => {
       const car = new CarModel();
 
       const result = await car.readOne('62c87efaf1f9d111bf4b6acc');
@@ -64,7 +64,7 @@ describe('Camada Model Car', () => {
     });
   });
 
-  describe('delete rota "/cars/:id"', () => {
+  describe('Verifies the DELETE/cars route', () => {
     before(() => {
       sinon.stub(Model, 'findOneAndDelete').resolves();
 
@@ -77,7 +77,7 @@ describe('Camada Model Car', () => {
       (Model.findOne as SinonStub).restore();
     });
 
-    it('delete a car', async () => {
+    it('Should delete the correct car', async () => {
       const car = new CarModel();
 
       const result = await car.delete('62c87efaf1f9d111bf4b6acc');
